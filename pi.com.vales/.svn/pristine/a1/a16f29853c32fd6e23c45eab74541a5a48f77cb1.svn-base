@@ -1,0 +1,151 @@
+-- phpMyAdmin SQL Dump
+-- version 3.1.3.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tempo de Geração: Out 26, 2009 as 10:04 PM
+-- Versão do Servidor: 5.1.33
+-- Versão do PHP: 5.2.9
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Banco de Dados: `siscof`
+--
+CREATE DATABASE `siscof` DEFAULT CHARACTER SET latin1 COLLATE latin1_bin;
+USE `siscof`;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cargo`
+--
+
+CREATE TABLE IF NOT EXISTS `cargo` (
+  `codigoCargo` int(11) NOT NULL AUTO_INCREMENT,
+  `descricaoCargo` varchar(50) COLLATE latin1_bin NOT NULL,
+  `codContabil` varchar(14) COLLATE latin1_bin NOT NULL,
+  `salarioCargo` double(12,2) NOT NULL,
+  PRIMARY KEY (`codigoCargo`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=1 ;
+
+--
+-- Extraindo dados da tabela `cargo`
+--
+
+
+-- --------------------------------------------------------
+--
+-- Estrutura da tabela `empresa`
+--
+
+CREATE TABLE `siscof`.`empresa` (
+`codigoEmp` INT NOT NULL AUTO_INCREMENT,
+`razaoSocial` VARCHAR(50) NOT NULL, 
+`nomeFantasia` VARCHAR(50) NOT NULL,
+`cnpj` VARCHAR(18) NOT NULL, 
+`inscrEst` VARCHAR(16) NOT NULL,
+`endEmp` VARCHAR(50) NOT NULL, 
+`numeroEmp` INT NULL, 
+`bairroEmp` VARCHAR(20) NULL, 
+`cidadeEmp` VARCHAR(20) NULL, 
+`ufEmp` VARCHAR(2) NULL,
+`cepEmp` VARCHAR(8) NULL, 
+`foneEmp` VARCHAR(12) NULL, 
+PRIMARY KEY (`codigoEmp`)) ENGINE = MyISAM;
+
+--
+-- Estrutura da tabela `funcionario`
+--
+
+CREATE TABLE IF NOT EXISTS `funcionario` (
+  `codigoFun` INT(11) NOT NULL AUTO_INCREMENT,
+  `nomeFun` varchar(45) COLLATE latin1_bin NOT NULL,
+  `rgFun` varchar(20) COLLATE latin1_bin NOT NULL,
+  `cpfFun` varchar(14) COLLATE latin1_bin NOT NULL,
+  `ctpsFun` varchar(16) COLLATE latin1_bin NOT NULL,
+  `dataNascFun` DATE NOT NULL,
+  `sexoFun` varchar(1) COLLATE latin1_bin NOT NULL,
+  `endFun` varchar(45) COLLATE latin1_bin NOT NULL,
+  `bairroFun` varchar(35) COLLATE latin1_bin NOT NULL,
+  `cidadeFun` varchar(35) COLLATE latin1_bin NOT NULL,
+  `ufFun` varchar(2) COLLATE latin1_bin NOT NULL,
+  `admissaoFun` DATE NOT NULL,
+  `demissaoFun` DATE NOT NULL,
+  `salarioCargo` DOUBLE(12,2) NOT NULL,
+  `cepFun` varchar(8) COLLATE latin1_bin NOT NULL,
+  `foneFun` varchar(10) COLLATE latin1_bin NOT NULL,
+  `celularFun` varchar(10) COLLATE latin1_bin NOT NULL,
+  `paiFun` varchar(45) COLLATE latin1_bin NOT NULL,
+  `maeFun` varchar(45) COLLATE latin1_bin NOT NULL,
+  `enderecoPais` varchar(50) COLLATE latin1_bin NOT NULL,
+  `bairroPais` varchar(35) COLLATE latin1_bin NOT NULL,
+  `cidadePais` varchar(35) COLLATE latin1_bin NOT NULL,
+  `ufPais` varchar(2) COLLATE latin1_bin NOT NULL,
+  `fonePais` varchar(10) COLLATE latin1_bin NOT NULL,
+  `mesfechado` varchar(8) COLLATE latin1_bin NOT NULL,
+  PRIMARY KEY (`codigoFun`),
+  
+  codigoEmp INT(11) unsigned DEFAULT NULL,
+	FOREIGN KEY (codigoEmp)
+	REFERENCES empresa(codigoEmp),
+
+ codigoCargo INT(11) unsigned DEFAULT NULL,
+	FOREIGN KEY (codigoCargo)
+	REFERENCES cargo(codigoCargo)
+	
+
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=3 ;
+
+--
+-- Estrutura da tabela `historico`
+--
+
+CREATE TABLE IF NOT EXISTS `historico` (
+  `codigoHist` INT(11) NOT NULL AUTO_INCREMENT,
+  `descricaoHist` varchar(50) COLLATE latin1_bin NOT NULL,
+  `debCreHist` varchar(14) COLLATE latin1_bin NOT NULL,
+   PRIMARY KEY (`codigoHist`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=1 ;
+  
+--
+-- Estrutura da tabela `usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `codigoUsuario` INT(11) NOT NULL AUTO_INCREMENT,
+  `nomeUsuario` varchar(8) COLLATE latin1_bin NOT NULL,
+  `senhaUsuario` varchar(6) COLLATE latin1_bin NOT NULL,
+  `nivelUsuario` varchar(1) COLLATE latin1_bin NOT NULL,
+   PRIMARY KEY (`codigoUsuario`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=1 ;
+
+--
+-- Estrutura da tabela `lancamento`
+--
+
+CREATE TABLE IF NOT EXISTS `lancamento` (
+  `codigoLanc` INT(11) NOT NULL AUTO_INCREMENT,
+  `descricaoLanc` varchar(45) COLLATE latin1_bin NOT NULL,
+  `debCreHist` varchar(1) COLLATE latin1_bin NOT NULL,
+  `dataEmissao` DATE NOT NULL,
+  `valorLanc` DOUBLE(12,2) NOT NULL,
+  `dataVenc` DATE NOT NULL,
+  `dataPgto` DATE NOT NULL,
+  `complLanc` varchar(45) COLLATE latin1_bin NOT NULL,
+   PRIMARY KEY (`codigoLanc`),
+  
+  codigoEmp INT(11) unsigned DEFAULT NULL,
+	FOREIGN KEY (codigoEmp)
+	REFERENCES empresa(codigoEmp),
+
+  codigoFun INT(11) unsigned DEFAULT NULL,
+	FOREIGN KEY (codigoFun)
+	REFERENCES funcionario(codigoFun),
+
+  codigoHist INT(11) unsigned DEFAULT NULL,
+	FOREIGN KEY (codigoHist)
+	REFERENCES historico(codigoHist)
+	
+
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=3 ;

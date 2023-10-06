@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Tue Jan 29 15:27:35 BRST 2019
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=C\:\\pi.com\\pi.com.Vales.jar
+manifest.mergeall=true
+manifest.mainclass=Interface.Principal_main
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=
