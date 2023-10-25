@@ -134,13 +134,9 @@ public class funcaoData {
 				return "";					
 			}			
 
-			if(data != null){
-				String datn = format.format(data);
-				if(!datn.trim().equals(funcaoData.dataDefault())){					
-					return format.format(data);						
-				}else{
-					return "";
-				}
+			String datn = format.format(data);
+			if(!datn.trim().equals(funcaoData.dataDefault())){					
+				return format.format(data);						
 			}else{
 				return "";
 			}			

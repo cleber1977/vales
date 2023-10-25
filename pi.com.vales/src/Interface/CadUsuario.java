@@ -113,7 +113,7 @@ public class CadUsuario extends JPanel {
 		tNomeUsu.setBounds(85, nlinha * ulinha, 200, 20);
 		jcampos.add(tNomeUsu);
 
-		// Adicionando evento de colocar maiusculo quando digitar o testo.
+		// Adicionando evento de colocar maiusculo quando digitar o texto.
 		tNomeUsu.addKeyListener(new KeyAdapter(){
 			public void keyTyped(KeyEvent e) {
 				if(tNomeUsu.getText().length() >= 8){
